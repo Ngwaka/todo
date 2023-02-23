@@ -9,10 +9,17 @@ export class HardcodedAuthenticationService {
 
   authenticate(username : String , password : String){
     if(username=='claude' && password=='dummy'){
+      sessionStorage.setItem('authenticatedUser', username.toString());
       return true;
 
-    }else{
-      return false;
     }
+    return false;
+    
   }
+
+  isUserLoggedIn(){
+    let user= sessionStorage.getItem('authenticatedUser')
+    return !(user===null)
+  }
+
 }

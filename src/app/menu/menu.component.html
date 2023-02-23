@@ -7,14 +7,14 @@
 
         <!-- Navigation Links -->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a routerLink="/welcome/in28Minutes" class="nav-link">Home</a></li>
-            <li class="nav-item"><a routerLink="/todos" class="nav-link">Todos</a></li>
+            <li  *ngIf="hardAuthenticationService.isUserLoggedIn()" class="nav-item"><a routerLink="/welcome/in28Minutes" class="nav-link">Home</a></li>
+            <li *ngIf="hardAuthenticationService.isUserLoggedIn()" class="nav-item"><a routerLink="/todos" class="nav-link">Todos</a></li>
         </ul>
 
         <!-- User Links -->
         <ul class="navbar-nav justify-content-end">
-            <li class="nav-item"><a routerLink="/login" class="nav-link">Log In</a></li>
-            <li class="nav-item"><a routerLink="/logout" class="nav-link">Log Out</a></li>
+            <li  *ngIf="!hardAuthenticationService.isUserLoggedIn()" class="nav-item"><a routerLink="/login" class="nav-link">Log In</a></li>
+            <li *ngIf="hardAuthenticationService.isUserLoggedIn()" class="nav-item"><a routerLink="/logout" class="nav-link">Log Out</a></li>
         </ul>
 
     </nav>
