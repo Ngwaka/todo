@@ -31,6 +31,14 @@ export class WelcomeComponent implements OnInit{
     );
   }
 
+  getWelcomeMessageWithParameter() {
+    this.service.executeHelloWoldBeanServiceWithPathVariable(this.name).subscribe(
+      response =>this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
+    );
+  }
+
+
 
   handleSuccessfulResponse(response: any) : void{
     //console.log(response.name);

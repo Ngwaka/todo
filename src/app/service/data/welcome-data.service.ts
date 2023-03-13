@@ -20,5 +20,11 @@ export class WelcomeDataService {
 
   }
 
+  executeHelloWoldBeanServiceWithPathVariable(name: any){
+
+    const url = `http://localhost:8080/hello-wold-bean/path-variable/${name}`;
+    return this.http.get<HelloWorldBean>(url);
+
+  }
 
 }
