@@ -1,10 +1,13 @@
 <table class="table table-striped" style="margin-top: 30px;">
+
+    <div class="alert alert-success" *ngIf="message">{{message}}</div>
     
     <thead class="thead-dark">
         <tr>
-            <th style="width: 50%;">DESCRIPTION</th>
+            <th style="width: 35%;">DESCRIPTION</th>
             <th style="width: 25%;">TARGET DATE</th>
-            <th style="width: 25%;">IS COMPLETED?</th>
+            <th style="width: 15%;">IS COMPLETED?</th>
+            <th style="width: 25%;">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -15,7 +18,7 @@
                 <span *ngIf="todo.done; else notDone">Yes</span>
                 <ng-template #notDone>No</ng-template>
             </td>
-            
+            <td><button class="btn btn-warning" (click)="deleteTodo(todo.id)">DELETE</button></td>
 
         </tr>
     </tbody>
