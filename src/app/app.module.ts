@@ -12,6 +12,9 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -23,12 +26,21 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MenuComponent,
     FooterComponent,
     LogoutComponent
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      timeOut: 6000,
+      extendedTimeOut: 2000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    
+    }),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

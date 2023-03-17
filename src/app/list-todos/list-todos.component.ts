@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
+import { NotificationsPopupService } from '../service/notifications-popup.service';
 
 export class Todo{
   constructor(  
@@ -22,10 +23,11 @@ export class ListTodosComponent implements OnInit{
 
 
   todos : Todo[]= [];
-  message = ''
+  //message = ''
   
   constructor(
-    private todoService : TodoDataService
+    private todoService : TodoDataService,
+    private notification : NotificationsPopupService
   ){}
 
 
@@ -40,7 +42,8 @@ export class ListTodosComponent implements OnInit{
   deleteTodo(id : any){
     this.todoService.deleteTodo('in28minutes', id).subscribe(
       response =>{
-        this.message = `Delete of Todo ${id} successful`;
+       // this.message = `Delete of Todo ${id} successful`;
+        this.notification.showSuccess(`Delete of Todo ${id} successful`);
       }
     )
   }
