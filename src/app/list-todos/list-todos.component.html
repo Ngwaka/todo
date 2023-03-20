@@ -18,7 +18,11 @@
                 <span *ngIf="todo.done; else notDone">Yes</span>
                 <ng-template #notDone>No</ng-template>
             </td>
-            <td><button class="btn btn-warning" (click)="deleteTodo(todo.id)">DELETE</button></td>
+            <td>
+                <button class="btn btn-success" (click)="updateTodo(todo.id)">UPDATE</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-warning" (click)="deleteTodo(todo.id)">DELETE</button>
+            </td>
 
         </tr>
     </tbody>

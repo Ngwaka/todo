@@ -20,4 +20,9 @@ export class TodoDataService {
     const url = `  http://localhost:8080/users/${username}/todos/${id}`;
     return this.http.delete<Todo[]>(url); 
   }
+
+  retrieveTodo(username: String, id: any){
+    const url = `  http://localhost:8080/users/${username}/todos/${id}`;
+    return this.http.get<Todo>(url); 
+  }
 }

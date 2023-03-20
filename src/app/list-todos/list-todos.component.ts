@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { NotificationsPopupService } from '../service/notifications-popup.service';
 
@@ -27,11 +28,20 @@ export class ListTodosComponent implements OnInit{
   
   constructor(
     private todoService : TodoDataService,
-    private notification : NotificationsPopupService
+    private notification : NotificationsPopupService,
+    private router :  Router
   ){}
 
 
   ngOnInit(): void {
+    this.todoService.retrieveAllTodos('in28minutes').subscribe(
+      response=>{
+        this.todos = response;
+      }
+    );
+  }
+
+  refreshTodos(){
     this.todoService.retrieveAllTodos('in28minutes').subscribe(
       response=>{
         this.todos = response;
@@ -44,9 +54,17 @@ export class ListTodosComponent implements OnInit{
       response =>{
        // this.message = `Delete of Todo ${id} successful`;
         this.notification.showSuccess(`Delete of Todo ${id} successful`);
+        this.refreshTodos()
       }
     )
   }
+
+
+  updateTodo(id : any){
+    this.router.navigate(['todos', id]);
+    
+  }
+    
     
   
 
