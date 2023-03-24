@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { HelloWorldBean } from './data/welcome-data.service';
+import { API_URL } from '../app.constants';
+
+export const TOKEN = 'token'
+export const AUTHENTICATED_USER = 'authenticatedUser'
 
 @Injectable({
   providedIn: 'root'
@@ -15,27 +18,27 @@ export class BasicAuthenticationService {
 
 
   isUserLoggedIn(){
-    let user= sessionStorage.getItem('authenticatedUser')
+    let user= sessionStorage.getItem(AUTHENTICATED_USER)
     return !(user===null)
   }
 
 
   getAuthenticateUser(){
-    return sessionStorage.getItem('authenticatedUser')
+    return sessionStorage.getItem(AUTHENTICATED_USER)
     
   }
 
 
   getAuthenticateToken(){
     if(this.getAuthenticateUser())
-    return sessionStorage.getItem('token')
+    return sessionStorage.getItem(TOKEN)
     return 
     
   }
 
   logout(){
-    sessionStorage.removeItem('authenticatedUser');
-    sessionStorage.removeItem('token');
+    sessionStorage.removeItem(AUTHENTICATED_USER);
+    sessionStorage.removeItem(TOKEN);
 
 
   }
@@ -54,13 +57,13 @@ export class BasicAuthenticationService {
       Authorization : basicAuthHeaderString
     })
 
-    const url = `http://localhost:8080/basicauth`;
+    const url = `${API_URL}/basicauth`;
     return this.http.get<AutenticationBean>(url, {headers})
       .pipe(  // the pipe method indicate what to do after the call of service succeed
         map(
           data =>{
-            sessionStorage.setItem('authenticatedUser', username.toString());
-            sessionStorage.setItem('token', basicAuthHeaderString);
+            sessionStorage.setItem(AUTHENTICATED_USER, username.toString());
+            sessionStorage.setItem(TOKEN, basicAuthHeaderString);
 
             return data;
           }
