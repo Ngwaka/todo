@@ -12,23 +12,31 @@ export class BasicAuthenticationService {
     private http : HttpClient 
   ) { }
 
-  authenticate(username : String , password : String){
-    if(username=='claude' && password=='dummy'){
-      sessionStorage.setItem('authenticatedUser', username.toString());
-      return true;
 
-    }
-    return false;
-    
-  }
 
   isUserLoggedIn(){
     let user= sessionStorage.getItem('authenticatedUser')
     return !(user===null)
   }
 
+
+  getAuthenticateUser(){
+    return sessionStorage.getItem('authenticatedUser')
+    
+  }
+
+
+  getAuthenticateToken(){
+    if(this.getAuthenticateUser())
+    return sessionStorage.getItem('token')
+    return 
+    
+  }
+
   logout(){
     sessionStorage.removeItem('authenticatedUser');
+    sessionStorage.removeItem('token');
+
 
   }
 
@@ -52,6 +60,8 @@ export class BasicAuthenticationService {
         map(
           data =>{
             sessionStorage.setItem('authenticatedUser', username.toString());
+            sessionStorage.setItem('token', basicAuthHeaderString);
+
             return data;
           }
         ));
