@@ -71,6 +71,26 @@ export class BasicAuthenticationService {
 
   }
 
+
+  executeJWTAutenticationService(username : String , password : String){
+
+   
+    
+
+    const url = `${API_URL}/authenticate`;
+    return this.http.post<any>(url , {username, password})
+      .pipe(  // the pipe method indicate what to do after the call of service succeed
+        map(
+          data =>{
+            sessionStorage.setItem(AUTHENTICATED_USER, username.toString());
+            sessionStorage.setItem(TOKEN, `Bearer ${data.token}` );
+
+            return data;
+          }
+        ));
+
+  }
+
   
 
 }
